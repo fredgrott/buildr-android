@@ -6,8 +6,8 @@ Gem::Specification.new do |s|
   s.name        = "buildr-android"
   s.version     = Buildr::Android::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ["TODO: Write your name"]
-  s.email       = ["TODO: Write your email address"]
+  s.authors     = ["Carl-Gustaf Harroch"]
+  s.email       = [""]
   s.homepage    = ""
   s.summary     = %q{TODO: Write a gem summary}
   s.description = %q{TODO: Write a gem description}
