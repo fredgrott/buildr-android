@@ -13,6 +13,8 @@
 # License for the specific language governing permissions and limitations under
 # the License.
 
+require 'rubygems'
+
 require 'bundler'
 Bundler::GemHelper.install_tasks
 
@@ -32,7 +34,7 @@ end
 def spec(platform = RUBY_PLATFORM[/java/] || 'ruby')
   @specs ||= ['ruby', 'java', 'x86-mswin32'].inject({}) { |hash, spec_platform|
     $platform = spec_platform
-    hash.update(spec_platform=>Gem::Specification.load('buildr.gemspec'))
+    hash.update(spec_platform=>Gem::Specification.load('buildr-android.gemspec'))
   }
   @specs[platform]
 end
