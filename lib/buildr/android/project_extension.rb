@@ -11,21 +11,9 @@ module Buildr
         @android_type = type
       end
       
-      # def initialize
-      #   super
-      #   self[:source, :main, :java]              = 'src'
-      #   self[:source, :main, :generated]         = 'gen'
-      #   self[:source, :main, :resources]         = 'res'
-      #   self[:source, :main, :assets]            = 'assets'
-      #   
-      #   # default test folder
-      #   self[:source, :test]                     = 'tests'
-      #   # unit test with robolectric
-      #   self[:source, :test, :unit]              = 'java'
-      #   # instrumentation project
-      #   self[:source, :test, :instrumentation]   = 'instrumentation'
-      # end
-        
+      def package_signed(keypath)
+      end
+      
       first_time do
         sdk = %w{ ANDROID_HOME ANDROID_SDK }.inject(nil) {|r, v| r = ENV[v]}
         fail "Please set ANDROID_HOME to point to your ANDROID SDK installation" unless sdk
@@ -36,14 +24,34 @@ module Buildr
         puts 'before time'
       end
       
-      after_define do |project|      
+      after_define do |project|
         puts 'before time'
+        
+        case project.android_type
+        when :robolectric
+          puts 'robolectric'
+          
+        when :instrumentation
+          puts 'instrumentation'
+          
+        when :main
+          else
+            puts 'normal android project'
+          end
+        end
+        
       end
-      
     end
   end
-end
-
-class Buildr::Project
-  include Buildr::Android::ProjectExtension
-end
+    
+  class JUnit
+    alias_method :old_run, :run
+    def run(tests, dependencies)
+      # ensure android.jar is put last upon junit test runs - needed by robolectric
+      old_run(tests, dependencies.sort_by {|w| (w.include? 'android') ? 1 : -1 })
+    end
+  end
+  
+  class Buildr::Project
+    include Buildr::Android::ProjectExtension
+  end
