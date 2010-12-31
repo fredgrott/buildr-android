@@ -82,8 +82,7 @@ eclipse.classpath_containers 'com.android.ide.eclipse.adt.ANDROID_FRAMEWORK'
 eclipse.builders ['com.android.ide.eclipse.adt.ResourceManagerBuilder' ,'com.android.ide.eclipse.adt.PreCompilerBuilder',
   'org.eclipse.jdt.core.javabuilder' , 'com.android.ide.eclipse.adt.ApkBuilder']
   
-  
-  
+    
   class Buildr::Project
     include Android
   end
