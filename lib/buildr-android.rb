@@ -1,5 +1,6 @@
-module Buildr
-  module Android
-    # Your code goes here...
-  end
-end
+require 'buildr'
+require 'buildr/java'
+require 'buildr/android/version'
+require 'buildr/android/config'
+require 'buildr/android/project_extension'
+#require 'buildr/android/android'

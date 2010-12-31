@@ -1,6 +1,5 @@
 unless defined?(SpecHelpers)
   module SandboxHook
-
     def SandboxHook.included(spec_helpers)
       # For testing we use the gem requirements specified on the buildr4osgi.gemspec
       spec = Gem::Specification.load(File.expand_path('../buildr-android.gemspec', File.dirname(__FILE__)))
