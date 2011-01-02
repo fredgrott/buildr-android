@@ -9,8 +9,8 @@ Gem::Specification.new do |s|
   s.authors     = ["Carl-Gustaf Harroch"]
   s.email       = [""]
   s.homepage    = ""
-  s.summary     = %q{TODO: Write a gem summary}
-  s.description = %q{TODO: Write a gem description}
+  s.summary     = "Android buildr plugin"
+  s.description = "d"
 
   s.rubyforge_project = "buildr-android"
 
