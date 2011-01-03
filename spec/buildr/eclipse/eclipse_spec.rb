@@ -19,5 +19,6 @@ describe Buildr::Eclipse::Android do
     # project('root:bar').android_type.should eql(:instrumentation)
     # project('root:libfoo').android_type.should eql(:library)
     # # project('root:foo').task('eclipse').invoke
+    1.should eql 1
   end
 end

@@ -7,5 +7,5 @@ unless defined?(SpecHelpers)
       require 'buildr-android'
     end
   end
-  require File.join(File.dirname(__FILE__), "/../buildr/spec/spec_helpers.rb")
+  require File.join(File.dirname(__FILE__), "../buildr/spec/spec_helpers.rb")
 end

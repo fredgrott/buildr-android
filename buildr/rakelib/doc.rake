@@ -19,8 +19,7 @@ begin # For the Web site, we use the SDoc RDoc generator/theme (http://github.co
   require 'sdoc'
 rescue LoadError
   puts "Buildr uses the SDoc RDoc generator/theme. You can install it by running rake doc:setup"
-  task('doc:setup') { install_gem 'voloko-sdoc', :source=>'http://gems.github.com' }
-end
+  task('doc:setup') { install_gem 'voloko-sdoc', :source=>'http://gems.github.com' }end
 
 
 require 'rake/rdoctask'
