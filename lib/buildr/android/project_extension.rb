@@ -15,17 +15,29 @@ module Buildr
       end
       
       first_time do
-        sdk = %w{ ANDROID_HOME ANDROID_SDK }.inject(nil) {|r, v| r = ENV[v]}
+        sdk = %w{ ANDROID_HOME }.inject(nil) {|r, v| r = ENV[v] }
         fail "Please set ANDROID_HOME to point to your ANDROID SDK installation" unless sdk
         @config ||= Buildr::Android::Config.new(self, sdk)
       end
       
       before_define do |project|
-        puts 'before time'
+        puts 'before time' + project.to_s
+         #puts 'robolectric project defined in ' + project.layout[:source, :test, :unit].to_s
+        #if (File.exists? project.layout[:source, :test, :unit]) 
+          
+          puts 'robolectric project defined in ' + project.layout[:source, :test, :unit].to_s
+          @robo = Project.define(project.name + ":robolectric", nil)
+          # @robo.parent = self
+          # ROBOLECTRIC_VERSION = '0.9.4'
+          # ROBOLECTRIC = "robolectric:robolectric:jar:#{ROBOLECTRIC_VERSION}"
+          # url = "http://pivotal.github.com/robolectric/downloads/robolectric-#{ROBOLECTRIC_VERSION}-all.jar"
+          # download(artifact(ROBOLECTRIC) => url)
+          # @robo.test.with ROBOLECTRIC
+          #  end
       end
       
       after_define do |project|
-        puts 'before time'
+        puts 'after time'
         
         case project.android_type
         when :robolectric
