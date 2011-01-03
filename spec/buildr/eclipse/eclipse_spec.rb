@@ -1,7 +1,6 @@
-# this is called a context (or a describe block)
-require File.dirname(__FILE__) + '/spec_helpers.rb'
+require File.expand_path(File.join(File.dirname(__FILE__), '../../', 'spec_helpers'))
 
-describe Eclipse do
+describe Buildr::Eclipse::Android do
   
   before(:each) do
   end
