@@ -30,6 +30,7 @@ def spec(platform = RUBY_PLATFORM[/java/] || 'ruby')
   @specs ||= ['ruby', 'java', 'x86-mswin32'].inject({}) { |hash, spec_platform|
     $platform = spec_platform
     hash.update(spec_platform=>Gem::Specification.load('buildr-android.gemspec'))
+    hash.update(spec_platform=>Gem::Specification.load('buildr/buildr.gemspec'))
   }
   @specs[platform]
 end

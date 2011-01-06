@@ -52,7 +52,7 @@ unless defined?(SpecHelpers)
   # Give a chance for plugins to do a few things before requiring the sandbox.
   include SandboxHook if defined?(SandboxHook)
 
-  require File.expand_path('sandbox', File.dirname(__FILE__))
+#  require File.expand_path('sandbox', File.dirname(__FILE__))
 
   module SpecHelpers
 
@@ -356,14 +356,13 @@ unless defined?(SpecHelpers)
     include ::RSpec::Matchers, SpecHelpers
   end
 
-
   ::RSpec.configure do |config|
-    # Make all Buildr methods accessible from test cases, and add various helper methods.
-    config.include Buildr
-    config.include SpecHelpers
+      # Make all Buildr methods accessible from test cases, and add various helper methods.
+      config.include Buildr
+      config.include SpecHelpers
 
     # Sanbdox Buildr for each test.
-    config.include Sandbox
+    #config.include Sandbox
   end
 
 end
