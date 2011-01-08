@@ -15,10 +15,19 @@ Gem::Specification.new do |s|
   To test:
   
   define 'android_project' do
-    android :version => 1, :sdk_location => '/opt/android'
+    include Android
+    
+    puts version # will output from manifest
     eclipse :android
+    
     compile.with :android
     test.with :robolectric
+    
+    package(:apk).tap do |apk|
+      apk[:key] = "location"
+      apk[:password] = "" # if none will ask in the shell
+    end
+    
   end
   TEXT
 

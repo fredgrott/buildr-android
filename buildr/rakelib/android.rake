@@ -18,7 +18,7 @@ begin
   end
   
   desc "Run all android specs"
-  RSpec::Core::RakeTask.new 'spec:android' do |task|
+  RSpec::Core::RakeTask.new 'spec:android'=>['_reports'] do |task|
     task.rspec_files = FileList['spec/**/*_spec.rb']
     task.rspec_opts = default_spec_opts
     task.rspec_opts << '--format documentation'

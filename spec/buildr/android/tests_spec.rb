@@ -7,6 +7,7 @@ describe Buildr::Robolectric do
       test.compile.using(:javac)
       test.framework.should eql(:junit)
     end
+    Project.define("name", nil).tap { |project| }
   end
   
 end

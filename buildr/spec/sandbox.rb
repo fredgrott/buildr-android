@@ -30,6 +30,7 @@ require 'buildr/groovy'
 require 'buildr/scala'
 require 'buildr/bnd'
 require 'buildr/jaxb_xjc'
+#require 'buildr/android'
 
 Java.load # Anything added to the classpath.
 artifacts(
@@ -82,7 +83,7 @@ module Sandbox
     end
   end
   @rules = Buildr.application.instance_variable_get(:@rules)
-
+  
   def sandbox
     @_sandbox = {}
 
@@ -101,7 +102,7 @@ module Sandbox
     Buildr.application.instance_eval { @rakefile = File.expand_path('buildfile') }
 
     @_sandbox[:load_path] = $LOAD_PATH.clone
-    #@_sandbox[:loaded_features] = $LOADED_FEATURES.clone
+    @_sandbox[:loaded_features] = $LOADED_FEATURES.clone
 
     # Later on we'll want to lose all the on_define created during the test.
     @_sandbox[:on_define] = Project.class_eval { (@on_define || []).dup }
@@ -127,38 +128,38 @@ module Sandbox
     Buildr.options.proxy.http = nil
 
     # Don't output crap to the console.
-    trace false
-    verbose false
+    trace true
+    verbose true
   end
 
-  # Call this from teardown.
+  # # Call this from teardown.
   def reset
     # Get rid of all the projects and the on_define blocks we used.
     Project.clear
-
+  
     on_define = @_sandbox[:on_define]
     extension_modules = @_sandbox[:extension_modules]
     global_callbacks = @_sandbox[:global_callbacks]
-
+  
     Project.class_eval do
       @on_define = on_define
       @global_callbacks = global_callbacks
       @extension_modules = extension_modules
     end
-
+  
     Layout.default = @_sandbox[:layout].clone
-
+    # 
     $LOAD_PATH.replace @_sandbox[:load_path]
     FileUtils.rm_rf @temp
     mkpath ENV['HOME']
-
+  
     # Get rid of all artifacts.
     @_sandbox[:artifacts].tap { |artifacts| Artifact.class_eval { @artifacts = artifacts } }
-
+  
     # Restore options.
     Buildr.options.test = nil
     (ENV.keys - @_sandbox[:env_keys]).each { |key| ENV.delete key }
-
+  
     Dir.chdir @_sandbox[:original_dir]
   end
 

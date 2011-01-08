@@ -52,7 +52,7 @@ unless defined?(SpecHelpers)
   # Give a chance for plugins to do a few things before requiring the sandbox.
   include SandboxHook if defined?(SandboxHook)
 
-#  require File.expand_path('sandbox', File.dirname(__FILE__))
+  require File.expand_path('sandbox', File.dirname(__FILE__))
 
   module SpecHelpers
 
@@ -362,7 +362,7 @@ unless defined?(SpecHelpers)
       config.include SpecHelpers
 
     # Sanbdox Buildr for each test.
-    #config.include Sandbox
+    config.include Sandbox
   end
 
 end
