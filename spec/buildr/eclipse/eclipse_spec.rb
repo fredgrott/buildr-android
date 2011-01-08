@@ -1,5 +1,7 @@
 require File.expand_path(File.join(File.dirname(__FILE__), '../../', 'spec_helpers'))
 
+ANDROID_NATURE    = Buildr::Eclipse::Android::NATURE
+
 module EclipseHelper
   def classpath_xml_elements
     task('eclipse').invoke
@@ -62,7 +64,7 @@ describe Buildr::Eclipse::Android do
   describe "eclipse's .project file for android" do
     
     describe 'Android project' do
-      
+
       before do
         write 'buildfile'
         write 'src/main/java/Activator.java'
@@ -70,11 +72,10 @@ describe Buildr::Eclipse::Android do
       end
 
       it 'should have plugin nature before Java nature' do
-        define('foo')
+        @e = define('ae') { eclipse.natures :android }
         task('eclipse').invoke
-        project_natures.should include(PLUGIN_NATURE)
-        project_natures.should include(JAVA_NATURE)
-        project_natures.index(PLUGIN_NATURE).should < project_natures.index(JAVA_NATURE)
+        File.should be_exist(@e._('.project'))
+        project_natures.should include(ANDROID_NATURE)        
       end
     end
   end  
