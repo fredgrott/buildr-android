@@ -1,12 +1,12 @@
 module Buildr  
-  class Robolectric < Junit
+  class Robolectric < JUnit
     
     # Robolectric version number.
-    VERSION = '0.9.4'
+    VERSION = '0.9.5'
 
     class << self
       def dependencies        
-        @dependencies ||= ["com.pivotallabs:robolectric:jar:#{version}"]
+        @dependencies ||= ["com.pivotallabs:robolectric:jar:#{VERSION}"]
       end
     end
     
