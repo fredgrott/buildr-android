@@ -1,18 +1,28 @@
-require 'rexml/document'
+require 'xmlsimple'
 
 module Buildr
   module Android
     class Manifest
-      include REXML
       
-      attr_accessor :version 
+      attr_accessor :xml
     
-      def initialize(project)
-        if File.exists?(project._("AndroidManifest.xml"))
-          @xml = Document.new(project._("AndroidManifest.xml"))
-          @version = @xml.to_s
+      def initialize(project)        
+        begin 
+          @xml = XmlSimple.xml_in(project._("AndroidManifest.xml"))
+        rescue Exception => e
+          error "can't parse AndroidManifest.xml"
         end
       end
+      
+      def version
+        @xml['android:versionName']
+      end
+      
+      def min_sdk
+        @xml['uses-sdk'][0]["android:minSdkVersion"] if @xml.has_key?("uses-sdk")
+      end
+      
     end
   end
 end
+

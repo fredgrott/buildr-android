@@ -13,8 +13,15 @@ module Buildr
       end
       
       before_define do |project|
-        @manifest = Buildr::Android::Manifest.new(project) if File.exists?(project._('AndroidManifest.xml'))
-        project.version = @manifest.version
+        # this is a android project
+        if File.exists?(project._('AndroidManifest.xml'))
+          begin
+            @manifest = Buildr::Android::Manifest.new(project)
+            warn(/no mimimum SDK set/) 
+            project.version = @manifest.version
+          rescue
+          end
+        end
       end
       
       after_define do |project|

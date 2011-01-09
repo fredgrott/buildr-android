@@ -5,6 +5,11 @@ module Buildr
     VERSION = '0.9.5'
 
     class << self
+      
+      def applies_to?(project) #:nodoc:
+        project.test.compile.language == :java || project.test.compile.language == :groovy
+      end
+      
       def dependencies        
         @dependencies ||= ["com.pivotallabs:robolectric:jar:#{VERSION}"]
       end
