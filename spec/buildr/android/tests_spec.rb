@@ -10,15 +10,15 @@ describe Buildr::Robolectric do
     end
 
     it 'should have robolectric if layout folder contains unit test' do
-      write 'java/HelloTest.java'
-      define 'foo'
+      write 'tests/java/HelloTest.java'
+      define 'foo', :layout => Buildr::Android::Layout.new
       project('foo').test.framework.should eql(:robolectric)
     end
     
-    it 'should not have robolectric if layout does not point to robo folder' do
-    end
-    
     it 'should put robolectric in front of dependency list' do
+      write 'tests/java/HelloTest.java'
+      define ('foo') { test.with :robolectic }
+      project('foo').test.dependencies.first.should eql("com.pivotallabs:robolectric:jar")
     end
   end
 end

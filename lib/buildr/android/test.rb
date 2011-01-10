@@ -7,7 +7,8 @@ module Buildr
     class << self
       
       def applies_to?(project) #:nodoc:
-        project.test.compile.language == :java || project.test.compile.language == :groovy
+        [project._("AndroidManifest.xml"), project._(:source, :test, :unit)].inject(true) {|o,v| o && File.exists?(v)}      
+        true
       end
       
       def dependencies        
@@ -20,7 +21,7 @@ module Buildr
       super.run(tests, dependencies.sort_by {|w| (w.include? 'android') ? 1 : -1 })
     end
     
-    task('clean') { }
+    task('clean') { _(:source, :test, :java) }
   end
   
   class Instrumentation < TestFramework::Java

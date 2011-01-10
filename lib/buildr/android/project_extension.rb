@@ -17,9 +17,11 @@ module Buildr
         if File.exists?(project._('AndroidManifest.xml'))
           begin
             @manifest = Buildr::Android::Manifest.new(project)
-            warn(/no mimimum SDK set/) 
+            warn(/no mimimum SDK set/) if @manifest.min_sdk
             project.version = @manifest.version
+            project.layout = Buildr::Android::Layout.new unless :layout
           rescue
+            error("problem with Android project")
           end
         end
       end

@@ -19,7 +19,7 @@ module Buildr
       end
       
       def min_sdk
-        @xml['uses-sdk'][0]["android:minSdkVersion"] if @xml.has_key?("uses-sdk")
+        @xml['uses-sdk'][0]["android:minSdkVersion"] rescue warn "No min SDK is defined"
       end
       
     end
