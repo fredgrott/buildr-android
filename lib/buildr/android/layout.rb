@@ -2,7 +2,7 @@ module Buildr
   module Android
     class Layout < Buildr::Layout
       def initialize
-        super
+        super        
         self[:source, :main, :java]              = 'src'
         self[:source, :main, :generated]         = 'gen'
         self[:source, :main, :resources]         = 'res'
@@ -11,9 +11,11 @@ module Buildr
         # default test folder
         self[:source, :test]                     = 'tests'
         # unit test with robolectric
-        self[:source, :test, :unit]              = 'java'
+        self[:source, :test, :unit]              = 'tests/java'
+        # unit test with robolectric
+        self[:source, :test, :java]       = 'tests/java'
         # instrumentation project
-        self[:source, :test, :instrumentation]   = 'instrumentation'
+        self[:source, :test, :instrumentation]   = 'tests/instrumentation'
       end  
     end
   end

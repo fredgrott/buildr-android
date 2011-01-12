@@ -25,5 +25,8 @@ describe Buildr::Android do
       lambda { define('foo') }.should show_warning(/no mimimum SDK set/)
     end
     
+    it "should create" do
+    end
+    
   end
 end

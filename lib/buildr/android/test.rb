@@ -5,9 +5,13 @@ module Buildr
     VERSION = '0.9.5'
 
     class << self
+
+      def version
+        Buildr.settings.build['robolectric'] || VERSION
+      end
       
       def applies_to?(project) #:nodoc:
-        [project._("AndroidManifest.xml"), project._(:source, :test, :unit)].inject(true) {|o,v| o && File.exists?(v)}      
+        [project._("AndroidManifest.xml"), project._(:source, :test, :java)].inject(true) {|o,v| o && File.exists?(v)} 
         true
       end
       
@@ -21,7 +25,7 @@ module Buildr
       super.run(tests, dependencies.sort_by {|w| (w.include? 'android') ? 1 : -1 })
     end
     
-    task('clean') { _(:source, :test, :java) }
+    task('clean') { }
   end
   
   class Instrumentation < TestFramework::Java

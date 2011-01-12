@@ -72,10 +72,17 @@ describe Buildr::Eclipse::Android do
       end
 
       it 'should have plugin nature before Java nature' do
-        @e = define('ae') { eclipse.natures :android }
+        define('foo') { eclipse.natures :android }
         task('eclipse').invoke
-        File.should be_exist(@e._('.project'))
+        File.should be_exist(project('foo')._('.project'))
         project_natures.should include(ANDROID_NATURE)        
+      end
+      
+      it 'should create robolectric project' do
+        write 'tests/java/robo.java'
+        define('foo') { eclipse.natures :android; test.with :robolectric }
+        File.should be_exist(project('foo')._('tests/.project'))
+        project_natures.should include(ANDROID_NATURE)
       end
     end
   end  
